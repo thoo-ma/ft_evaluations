@@ -6,6 +6,36 @@ import os
 import openai # https://cookbook.openai.com/examples/how_to_format_inputs_to_chatgpt_models
 from dotenv import load_dotenv
 
+
+def remove_key_from_dict(_dict, key):
+    try:
+        _dict.pop(key)
+        print(f'Removed key `{key}` from dictionary')
+    except:
+        print(f'Error: key `{key}` not in dictionary')
+
+ignored_projects = [
+    'shell-00',
+    'shell-01',
+    'c-00',
+    'c-01',
+    'c-02',
+    'c-03',
+    'c-04',
+    'c-05',
+    'c-06',
+    'c-07',
+    'c-08',
+    'c-09',
+    'c-10',
+    'c-11',
+    'c-12',
+    'c-13',
+    'rush-00',
+    'rush-01',
+    'rush-02'
+]
+
 load_dotenv()
 
 # Step 1: get 42 API access token
@@ -86,25 +116,8 @@ while True: # emulate a do-while
     time.sleep(1) # avoid 429 too many requests (2 by secs)
 
 # otherwise message too big for chatGPT API
-# TODO continue to pop even if the previous one failed
-try:
-    comments.pop('shell-00')
-    comments.pop('shell-01')
-    comments.pop('c-00')
-    comments.pop('c-01')
-    comments.pop('c-02')
-    comments.pop('c-03')
-    comments.pop('c-04')
-    comments.pop('c-05')
-    comments.pop('c-06')
-    comments.pop('c-07')
-    comments.pop('c-08')
-    comments.pop('c-09')
-    comments.pop('rush-00')
-    comments.pop('rush-01')
-    comments.pop('rush-02')
-except:
-    print('Error while removing key from the comments dictionary')
+for project in ignored_projects:
+    remove_key_from_dict(comments, project)
 
 json_comments = json.dumps(comments, indent=2)
 print(json_comments)
