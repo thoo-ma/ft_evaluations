@@ -129,21 +129,18 @@ openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 prompt = """
 Tu vas recevoir un dictionnaire python.
-Chaque clé correspond à un travail, le plus souvent un programme informatique.
-Chaque valeur est une liste d' analyses/commentaires/réactions au projet identifié par sa clé.
-Chaque element de cette liste est rédigé par une personne distincte, avec un niveau d'expertise en informatique propre.
+Chaque clé est le titre d'un projet informatique.
+Chaque valeur est une liste d' analyses/commentaires/réactions au projet, rédigés par différentes personnes.
+(Certaines sont rédigéss en anglais: traduis les et tiens en compte comme tout autre.)
+Tous les projets du dictionnaire ont été réalisés par la même personne.
 
-Certains de ces avis sont rédigés en anglais. Traduis les et tiens en compte comme tout autre.
+Tu vas produire un résumé de ces avis.
+Ce résumé présentera les caractéristiques communes aux projets réalisés: leurs qualités, leurs faiblesses et les axes d'amélioration.
+Ce résumé présentera, dans le même temps, et selon les mêmes critèrs, le profil type de la personne qui a réalisé ces projets.
 
-Tu vas produire un résumé de ces avis récoltés.
-Ce résumé présentera les traits et caractéristiques communes des travaux considérés: ses qualités, ses faiblesses et ses axes d'amélioration.
-
-Un biais est toutefois présent dans ces commentaires.
-La plupart du temps, ils évaluent un travail mené à terme.
-Des expressions telles que 'bon travail', 'bravo' ou 'bon courage' sont souvent présentes.
+Un biais est toutefois présent dans ces avis.
+Ils évaluent toujours un travail mené à terme, si bien que des expressions telles que 'bon travail', 'bravo' ou 'bon courage' sont souvent présentes.
 Ne les prend pas en considération outre mesure, ils pourraient t'amener à surévaluer la qualité du travail considéré.
-
-Dresse en même tempsle portrait (qualités, défauts et axes d'amérioration) de celui a réalisé ces travaux.
 """
 
 response = openai.ChatCompletion.create(
